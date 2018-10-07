@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from jwt_security import authenticate, identity
 from resources.user import UserRegistor
@@ -13,7 +14,9 @@ def create_app():
     # please refer to the following link as to why
     # https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+
+    # DATABASE_URL postgresql URL if deployed on heroku, fall back to local sqlite database if not found
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 
     register_extension(app)
     return app
