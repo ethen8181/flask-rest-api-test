@@ -32,7 +32,7 @@ Here we make a request that contains the username and password to the `/auth` re
 }
 ```
 
-Then for all the endpoints that are marked as `@jwt_required()`, we need to send the token along with the request, i.e. we need to include an additional header `Authorization: JWT [insert the token above here]`.
+Then for all the endpoints that are marked as `@jwt_required()`, e.g. during get `/items/<name>`, we need to send the token along with the request, i.e. we need to include an additional header `Authorization: JWT [insert the token above here]`.
 
 # Heroku Deployment
 
