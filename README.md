@@ -1,6 +1,42 @@
 # Flask REST API
 
-Heroku is a web service that runs our code and allows other to access/interact it.
+## Endpoints
+
+Start the app locally.
+
+```python
+python app/app.py
+```
+
+<img src=screenshots/endpoints.png width=30% height=30%>
+
+Example:
+
+- call `/register` with username and password to register a user.
+- call `/auth` with the username and password to retrieve the JWT token.
+- post `/store/<name>` to create a store.
+- post `/item/<name>` with price and store_id to create a new item.
+- post `/items` to retrieve all the items.
+
+## Authentication
+
+The app uses [JWT](https://pythonhosted.org/Flask-JWT/) on some of the endpoints for security.
+
+JWT, Json Web Token allows us to encode our message so that other people who don't have the decryption key won't be able to read the encoded message.
+
+Here we make a request that contains the username and password to the `/auth` resource to get the token. If done correctly, we should get a response that looks something like this:
+
+```json
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY0NDU5NDEsImlhdCI6MTU2NjQ0NTY0MSwibmJmIjoxNTY2NDQ1NjQxLCJpZGVudGl0eSI6MX0.0P9OQoNyHKfB6B9NAVeZTKdVTZULOqgz8JgGCz-5y8k"
+}
+```
+
+Then for all the endpoints that are marked as `@jwt_required()`, we need to send the token along with the request, i.e. we need to include an additional header `Authorization: JWT [insert the token above here]`.
+
+# Heroku Deployment
+
+Heroku is a web service that runs our code and allows other to access/interact with it.
 This process is called "hosting"
 
 Apart from being able to host our application, it also enables SSL (Secure Sockets Layer)
@@ -28,8 +64,6 @@ We can then create a app with Heroku.
 4. Add the Python build-pack (Settings tab)
 5. We can choose manual deploy or automatic deploy. (Deploy tab)
 6. After deploying we can test the endpoints in Postman, remember to change the URI.
-
-
 
 We can install the heroku command line and check our app's logs
 

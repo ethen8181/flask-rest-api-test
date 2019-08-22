@@ -1,5 +1,5 @@
 """
-Boilerplate code from Flask-JWT
+Boilerplate code for Flask-JWT
 https://pythonhosted.org/Flask-JWT/
 """
 from models.user import UserModel

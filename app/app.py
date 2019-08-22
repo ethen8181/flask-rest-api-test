@@ -9,7 +9,10 @@ from extensions import api, jwt, db
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = 'some secret key'
+
+    # the secret key for JWT, in production the secret key should written here
+    # where anyone could see
+    app.secret_key = 'new secret key'
 
     # please refer to the following link as to why
     # https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
@@ -43,6 +46,7 @@ app = create_app()
 
 @app.before_first_request
 def create_table():
+    """Helpful shortcut to tell SQLAlchemy to create all the tables for us."""
     db.create_all()
 
 
